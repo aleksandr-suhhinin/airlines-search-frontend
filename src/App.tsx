@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import RouteForm from './components/RouteForm';
+import MapView, { Hop } from './components/MapView';
+import RouteDisplay from './components/RouteDisplay';
+
+interface RouteData {
+  hops: Hop[];
+  distance: number;
+}
 
 function App() {
+  const [route, setRoute] = useState<RouteData | null>(null); // Хранение данных о маршруте
+
+  const handleRouteUpdate = (routeData: RouteData) => {
+    setRoute(routeData);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <RouteForm onRouteUpdate={handleRouteUpdate} />
+      {route && <RouteDisplay route={route} />}
+      <MapView route={route} />
     </div>
   );
 }
