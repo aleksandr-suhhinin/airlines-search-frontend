@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Autosuggest from 'react-autosuggest';
 import axios from 'axios';
+import { autosuggestions } from './constants';
 
 export interface Airport {
   id: string;
@@ -17,9 +18,9 @@ interface AirportAutosuggestProps {
     callback: Function,
 }
 
-// Получение автоподсказок с бэкенда
+
 const fetchSuggestions = async (input: string): Promise<Airport[]> => {
-  const response = await axios.get(`http://localhost:3000/suggestions/${input}`);
+  const response = await axios.get(`${autosuggestions}${input}`);
   return response.data;
 };
 

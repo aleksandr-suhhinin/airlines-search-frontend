@@ -8,6 +8,8 @@ interface RouteData {
   distance: number;
 }
 
+
+
 function App() {
   const [route, setRoute] = useState<RouteData | null>(null); // Хранение данных о маршруте
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios, { AxiosError } from 'axios';
 import AirportAutosuggest from './AirportAutosuggest';
 import { Alert } from 'react-bootstrap';
+import { routes } from './constants';
 
 interface RouteFormProps {
   onRouteUpdate: (routeData: any) => void;
@@ -16,7 +17,7 @@ function RouteForm({ onRouteUpdate }: RouteFormProps) {
   const handleSearchRoute = async () => {
     setError(null);
     try {
-      const response = await axios.get(`http://localhost:3000/routes/${srcAirport}/${destAirport}`);
+      const response = await axios.get(`${routes}${srcAirport}/${destAirport}`);
       onRouteUpdate(response.data);  
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {
